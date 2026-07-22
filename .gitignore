@@ -1,0 +1,76 @@
+########################
+# Secrets / Env
+########################
+.env
+.env.*
+*.key
+*.pem
+
+########################
+# Python
+########################
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+########################
+# Jupyter
+########################
+.ipynb_checkpoints/
+*.ipynb
+
+########################
+# Data / Artifacts
+########################
+*.csv
+*.tsv
+*.parquet
+*.jsonl
+*.pkl
+*.joblib
+
+########################
+# HTML (generated / build)
+########################
+*.html
+
+
+########################
+# Ontology / RDF
+########################
+*.rdf
+*.ttl
+*.owl
+*.nt
+
+########################
+# Logs
+########################
+*.log
+
+# Images (default ignore)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+
+# Allow README images
+!docs/
+!docs/images/
+!docs/images/*.png
+!docs/images/*.jpg
+!docs/images/*.jpeg
+
+########################
+# OS
+########################
+.DS_Store
+Thumbs.db
