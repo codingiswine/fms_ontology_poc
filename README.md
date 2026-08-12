@@ -92,7 +92,7 @@
   - `Work`: 개별 작업 (일자/시간/작업자/내용 연결)
   - `Worker`: 작업자 및 이름
   - `Location`, `Plan`, `Material`, `Date`, `Time` 등
-- Ontology는 Protégé에서 관리하며 `11final_merge.ttl`, `owl_vol1_clean.rdf` 등으로 버전 관리됩니다.
+- Ontology는 Protégé에서 관리하며 `11final_merge.ttl`, `owl_vol1_clean.rdf` 등 파일명으로 구분한 로컬 스냅샷으로 관리됩니다.
 
 ---
 
