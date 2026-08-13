@@ -43,6 +43,10 @@
 
 ## 📁 주요 파일
 
+<div align="center">
+  <img src="docs/images/architecture.svg" alt="FMS 온톨로지 PoC 전체 아키텍처" width="900">
+</div>
+
 | 파일 | 설명 |
 | --- | --- |
 | `automatic_classification.py` | CSV 업무일지를 읽어 장소/업무/조치/자재 등을 추출하고 FMS Ontology 개체로 RDF 트리플 생성 |
