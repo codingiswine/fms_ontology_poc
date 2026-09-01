@@ -25,7 +25,7 @@
 - **목표**:
   1. 장소/업무/조치 등의 핵심 속성을 자동 추출
   2. Ontology(OWL/RDF)로 구조화해 관계를 명시
-  3. GPT가 SPARQL 질의를 생성하고 RDF 그래프를 조회하는 RAG 파이프라인 구현
+  3. GPT가 자연어 질문을 SPARQL 질의로 변환해 RDF 그래프를 조회하는 질의 인터페이스 구현 (질의 결과는 원문 그대로 반환 — 자연어 답변 생성 단계 없음)
   4. 그래프 시각화로 업무 관계를 탐색할 수 있는 PoC 제공
 
 ---
@@ -52,8 +52,8 @@
 | `automatic_classification.py` | CSV 업무일지를 읽어 장소/업무/조치/자재 등을 추출하고 FMS Ontology 개체로 RDF 트리플 생성 |
 | `2sparql_gpt.py` | 사용자 질문을 GPT-4o로 SPARQL 쿼리로 변환 후 RDF 그래프를 조회하는 CLI |
 | `1sparql.py` | 직접 SPARQL을 작성해 RDF 그래프를 조회하는 예제 |
-| `3pyvis.py`, `4pyvis_search.py` | RDF 그래프를 pyvis로 시각화 (검색/하이라이트 기능 포함) |
-| `*.rdf`, `*.ttl` | Protégé에서 관리하는 Ontology 및 최신 병합 데이터 (`11final_merge.ttl` 등) |
+| `3pyvis.py`, `4pyvis_search.py`, `5pyvis_search.py` | RDF 그래프를 pyvis로 시각화 (검색/하이라이트 기능 포함). `4`는 `11final_merge.ttl`, `5`는 `owl_vol1_clean.ttl`을 입력으로 사용 |
+| `*.rdf`, `*.ttl` | Protégé에서 관리하는 Ontology 및 병합 데이터 (`11final_merge.ttl` 등) — **로컬 파일이며 이 저장소에는 포함돼 있지 않음** (아래 참고사항) |
 
 ---
 
@@ -70,8 +70,8 @@
    ```bash
    python automatic_classification.py
    ```
-   - `latest_electricity_data.csv` 경로를 수정하여 사용
-   - 결과 RDF가 `/mnt/data/protege_ready_electricity_data.rdf` 등으로 저장됨
+   - 기본 입력은 스크립트와 같은 디렉토리의 `최종업무일지데이터.csv` (환경변수 `FMS_SOURCE_CSV`로 다른 경로 지정 가능)
+   - 결과 RDF는 스크립트와 같은 디렉토리에 `protege_ready_electricity_data.rdf`로 저장됨 (환경변수 `FMS_RDF_OUTPUT`으로 변경 가능)
 
 3. **GPT 기반 SPARQL 질의**
    ```bash
@@ -96,7 +96,7 @@
   - `Work`: 개별 작업 (일자/시간/작업자/내용 연결)
   - `Worker`: 작업자 및 이름
   - `Location`, `Plan`, `Material`, `Date`, `Time` 등
-- Ontology는 Protégé에서 관리하며 `11final_merge.ttl`, `owl_vol1_clean.rdf` 등 파일명으로 구분한 로컬 스냅샷으로 관리됩니다.
+- Ontology는 Protégé에서 관리하며 `11final_merge.ttl`, `owl_vol1_clean.rdf` 등 파일명으로 구분한 로컬 스냅샷으로 관리됩니다. **원본 업무일지 CSV와 RDF/TTL 스냅샷은 고객사 데이터라 이 저장소에 포함하지 않았습니다** — 따라서 저장소를 클론한 것만으로는 시각화·질의 스크립트를 바로 실행할 수 없고, 동일 스키마의 CSV를 `FMS_SOURCE_CSV`로 지정해 `automatic_classification.py`부터 실행해야 합니다.
 
 ---
 

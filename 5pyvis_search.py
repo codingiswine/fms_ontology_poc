@@ -45,7 +45,7 @@ for s, p, o in g:
 net.save_graph(str(OUTPUT_HTML))
 
 # ✅ 검색 기능 + Enter 순환 + ESC 해제 기능 JS 삽입
-with open(output_path, "r", encoding="utf-8") as f:
+with open(OUTPUT_HTML, "r", encoding="utf-8") as f:
     html = f.read()
 
 search_box = """
