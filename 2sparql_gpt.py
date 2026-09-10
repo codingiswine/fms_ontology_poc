@@ -52,7 +52,7 @@ while True:
     - fms:Work (rdf:type)
     - fms:hasDate (날짜, 예: "2025_06_17")
     - fms:hasWorker (작업자, 연결된 개체)
-    - fms:hasName (작업자 이름 속성, 예: "박기준")
+    - fms:hasName (작업자 이름 속성, 예: "홍길동")
     - fms:hasLocation (장소, 예: "1층 로비")
     - fms:hasTime (시간, 예: "14:00~15:00")
     - fms:hasPlan (업무계획, 예: "옥상 점검")
@@ -64,18 +64,18 @@ while True:
     PREFIX는 생략하고 fms: 접두어만 써.
     
     ❗️필수 규칙:
-    - 작업자 이름 검색 시: ?work → hasWorker → ?worker → hasName → ?name → FILTER(CONTAINS(?name, "박기준"))
+    - 작업자 이름 검색 시: ?work → hasWorker → ?worker → hasName → ?name → FILTER(CONTAINS(?name, "홍길동"))
     - 날짜는 MONTH 같은 함수 쓰지 말고 CONTAINS(STR(?date), "2025_06") 처럼 처리해
     - 장소/업무내용 검색 시에는 CONTAINS + LCASE 조합을 써도 좋아
 
     예시 질문:
-    "박기준 업무내역 알려줘"
+    "홍길동 업무내역 알려줘"
     → SELECT ?content WHERE {{
         ?work rdf:type fms:Work .
         ?work fms:hasWorker ?worker .
         ?worker fms:hasName ?name .
         ?work fms:hasWorkContent ?content .
-        FILTER(CONTAINS(?name, "박기준"))
+        FILTER(CONTAINS(?name, "홍길동"))
     }}
 
     질문: {user_question}
