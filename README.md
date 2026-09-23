@@ -71,7 +71,7 @@
    python automatic_classification.py
    ```
    - 기본 입력은 스크립트와 같은 디렉토리의 `최종업무일지데이터.csv` (환경변수 `FMS_SOURCE_CSV`로 다른 경로 지정 가능)
-   - 결과 RDF는 스크립트와 같은 디렉토리에 `protege_ready_electricity_data.rdf`로 저장됨 (환경변수 `FMS_RDF_OUTPUT`으로 변경 가능)
+   - 결과 RDF는 스크립트와 같은 디렉토리에 `protege_ready_fms_data.rdf`로 저장됨 (환경변수 `FMS_RDF_OUTPUT`으로 변경 가능)
 
 3. **GPT 기반 SPARQL 질의**
    ```bash

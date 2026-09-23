@@ -74,7 +74,7 @@ for idx, row in df.iterrows():
             g.add((mat_uri, FMS.hasQuantity, Literal(row["수량"])))
 
 # ✅ RDF 저장
-output_path = Path(os.getenv("FMS_RDF_OUTPUT", BASE_DIR / "protege_ready_electricity_data.rdf"))
+output_path = Path(os.getenv("FMS_RDF_OUTPUT", BASE_DIR / "protege_ready_fms_data.rdf"))
 g.serialize(destination=str(output_path), format="xml")
 
 print(f"✅ RDF saved to {output_path}")
