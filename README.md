@@ -59,6 +59,8 @@
 
 ## 🚀 실행 방법
 
+> **파일 흐름**: 업무일지 CSV → (2단계) `protege_ready_fms_data.rdf` 생성 → Protégé에서 병합·정제 → `11final_merge.ttl` / `owl_vol1_clean.ttl` 스냅샷 → (3·4단계 스크립트가 이 스냅샷을 읽음). 스크립트별 기본 경로는 `FMS_*` 환경변수로 바꿀 수 있습니다.
+
 1. **가상환경 구성 및 패키지 설치**
    ```bash
    python -m venv .venv
