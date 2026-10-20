@@ -94,10 +94,14 @@
 ## 📊 Ontology 구조
 
 - 네임스페이스: `http://linkfms.kr/ontology/fms#`
-- 주요 개체
+- 클래스 (`RDF.type`으로 생성하는 개체)
   - `Work`: 개별 작업 (일자/시간/작업자/내용 연결)
   - `Worker`: 작업자 및 이름
-  - `Location`, `Plan`, `Material`, `Date`, `Time` 등
+  - `Date`: 작업 일자
+  - `Material`: 자재 (품명·규격·수량)
+- 속성 (리터럴로 작업에 붙는 값)
+  - `hasLocation`, `hasPlan`, `hasTime`, `hasWorkContent`, `hasName`, `hasSpecification`, `hasQuantity` 등
+  - 장소·업무계획·시간은 별도 클래스가 아니라 `Work`의 속성값이다
 - Ontology는 Protégé에서 관리하며 `11final_merge.ttl`, `owl_vol1_clean.rdf` 등 파일명으로 구분한 로컬 스냅샷으로 관리됩니다. **원본 업무일지 CSV와 RDF/TTL 스냅샷은 고객사 데이터라 이 저장소에 포함하지 않았습니다** — 따라서 저장소를 클론한 것만으로는 시각화·질의 스크립트를 바로 실행할 수 없고, 동일 스키마의 CSV를 `FMS_SOURCE_CSV`로 지정해 `automatic_classification.py`부터 실행해야 합니다.
 
 ---
