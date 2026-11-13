@@ -1,5 +1,7 @@
 # Advanced Ontology – 시설물 업무일지 구조화 PoC
 
+> 📌 **인턴십 PoC 기록용 저장소입니다.** 고객사 업무일지 데이터와 RDF 파일이 포함되지 않아 그대로는 실행되지 않습니다.
+
 <p align="center">
   <img src="docs/images/ontology_based_chatbot.png" alt="LINK FMS Main" width="100%">
 </p>
