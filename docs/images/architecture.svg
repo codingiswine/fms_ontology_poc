@@ -85,8 +85,8 @@
   <!-- Roadmap -->
   <rect x="620" y="460" width="620" height="130" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="1.3" stroke-dasharray="5,3"/>
   <text x="640" y="488" font-size="13" font-weight="700" fill="#9a3412">다음 단계로 설계 (미착수)</text>
-  <text x="640" y="513" font-size="12" fill="#7c2d12">· SPARQL 결과를 자연어로 후처리하는 Answer Agent화</text>
+  <text x="640" y="513" font-size="12" fill="#7c2d12">· 문장형 답변 단계(UI)를 이 저장소 코드로 이식</text>
   <text x="640" y="536" font-size="12" fill="#7c2d12">· 자동 추출 정확도 향상을 위한 NER/ML 모델 도입</text>
   <text x="640" y="559" font-size="12" fill="#7c2d12">· 관계 시각화 대시보드 웹앱 전환</text>
-  <text x="640" y="580" font-size="10.5" fill="#9a3412">※ 현재는 원문 결과만 반환 — 자연어 챗봇 아님</text>
+  <text x="640" y="580" font-size="10.5" fill="#9a3412">※ 이 저장소 CLI는 SPARQL 원문 결과만 반환 (문장형 답변은 저장소 미포함 UI에서 처리 — 스크린샷 참조)</text>
 </svg>

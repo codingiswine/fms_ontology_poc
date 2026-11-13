@@ -18,7 +18,7 @@
 
 <br>
 
-대기업 시설물 관리팀의 수기 업무일지를 **Ontology 기반 지식 그래프**로 변환하고, GPT + SPARQL 조합으로 질의응답을 수행하는 PoC 프로젝트입니다. 자유서술형 텍스트를 자동으로 추출·정제해 작업/설비/조치 관계를 명시적으로 표현하고, RDF 그래프를 통해 탐색할 수 있도록 설계했습니다.
+대기업 시설물 관리팀의 수기 업무일지를 **Ontology 기반 지식 그래프**로 변환하고, GPT + SPARQL 조합으로 질의응답을 수행하는 PoC 프로젝트입니다. 자유서술형 텍스트를 자동으로 추출·정제해 일자·작업자·작업시간·장소·업무내용·업무계획·자재 관계를 명시적으로 표현하고, RDF 그래프를 통해 탐색할 수 있도록 설계했습니다.
 
 
 
@@ -26,7 +26,7 @@
 
 - **데이터**: 2024년 이전 업무일지(엑셀/CSV)에 기록된 자유서술형 텍스트
 - **목표**:
-  1. 장소/업무/조치 등의 핵심 속성을 자동 추출
+  1. 일자·작업자·작업시간·장소·업무내용·업무계획·자재(품명/규격/수량) 등의 핵심 속성을 자동 추출
   2. Ontology(OWL/RDF)로 구조화해 관계를 명시
   3. GPT가 자연어 질문을 SPARQL 질의로 변환해 RDF 그래프를 조회하고, 조회 결과를 문장형 답변으로 돌려주는 질의 인터페이스 구현 (맨 위 스크린샷 — 이 저장소에 포함된 `2sparql_gpt.py`는 SPARQL 생성·실행까지의 CLI 버전입니다)
   4. 그래프 시각화로 업무 관계를 탐색할 수 있는 PoC 제공
@@ -52,7 +52,7 @@
 
 | 파일 | 설명 |
 | --- | --- |
-| `automatic_classification.py` | CSV 업무일지를 읽어 장소/업무/조치/자재 등을 추출하고 FMS Ontology 개체로 RDF 트리플 생성 |
+| `automatic_classification.py` | CSV 업무일지를 읽어 일자·작업자·작업시간·장소·업무내용·업무계획·자재(품명/규격/수량)를 추출하고 FMS Ontology 개체로 RDF 트리플 생성 |
 | `2sparql_gpt.py` | 사용자 질문을 GPT-4o로 SPARQL 쿼리로 변환 후 RDF 그래프를 조회하는 CLI |
 | `1sparql.py` | 직접 SPARQL을 작성해 RDF 그래프를 조회하는 예제 |
 | `3pyvis.py`, `4pyvis_search.py`, `5pyvis_search.py` | RDF 그래프를 pyvis로 시각화 (검색/하이라이트 기능 포함). `4`는 `11final_merge.ttl`, `5`는 `owl_vol1_clean.ttl`을 입력으로 사용 |
@@ -105,14 +105,14 @@
 - 속성 (리터럴로 작업에 붙는 값)
   - `hasLocation`, `hasPlan`, `hasTime`, `hasWorkContent`, `hasName`, `hasSpecification`, `hasQuantity` 등
   - 장소·업무계획·시간은 별도 클래스가 아니라 `Work`의 속성값이다
-- Ontology는 Protégé에서 관리하며 `11final_merge.ttl`, `owl_vol1_clean.ttl` 등 파일명으로 구분한 로컬 스냅샷으로 관리됩니다. **원본 업무일지 CSV와 RDF/TTL 스냅샷은 고객사 데이터라 이 저장소에 포함하지 않았습니다** — 따라서 저장소를 클론한 것만으로는 시각화·질의 스크립트를 바로 실행할 수 없고, 동일 스키마의 CSV를 `FMS_SOURCE_CSV`로 지정해 `automatic_classification.py`부터 실행해야 합니다.
+- Ontology는 Protégé에서 관리하며 `11final_merge.ttl`, `owl_vol1_clean.ttl` 등 파일명으로 구분한 로컬 스냅샷으로 관리됩니다. **원본 업무일지 CSV와 RDF/TTL 스냅샷은 고객사 데이터라 이 저장소에 포함하지 않았습니다** — 따라서 저장소를 클론한 것만으로는 시각화·질의 스크립트를 바로 실행할 수 없고, 동일 스키마의 CSV(필수 컬럼: `일자`, `작업자`, `작업시간`, `업무내용`, `업무계획`, `품명`, `규격`, `수량`)를 `FMS_SOURCE_CSV`로 지정해 `automatic_classification.py`부터 실행해야 합니다. 단, `automatic_classification.py`는 RDF/XML(`.rdf`)로 저장하고 `2sparql_gpt.py`·`3pyvis.py`·`4/5pyvis_search.py`는 Turtle(`format="turtle"`)로 읽으므로, 생성된 `.rdf`를 Protégé 등에서 Turtle(`.ttl`)로 변환한 뒤 경로를 지정해야 합니다 (`2sparql_gpt.py`: `FMS_RDF_PATH`, `3pyvis.py`·`4pyvis_search.py`: `FMS_VIS_RDF`, `5pyvis_search.py`: `FMS_VIS_CLEAN_RDF`).
 
 ---
 
 ## 🔮 향후 개선 아이디어
 
 - 자동 추출 정확도 향상을 위한 NER/ML 모델 도입
-- SPARQL 결과를 자연어로 후처리하는 Answer Agent화
+- 문장형 답변 단계(UI)를 이 저장소 코드로 이식
 - 관계 시각화 대시보드 웹앱 전환
 
 ---
